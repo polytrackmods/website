@@ -1,3 +1,11 @@
+/* Forced Square Font */
+@font-face {
+  font-family: forced_square;
+  src: url('ForcedSquare.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Reset */
 * {
   margin: 0;
@@ -8,8 +16,8 @@
 /* General */
 body {
   font-family: system-ui, sans-serif;
-  background: #f9f9fb;
-  color: #222;
+  background: #112052;
+  color: #b3c1ffff;
   line-height: 1.6;
 }
 
@@ -19,7 +27,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  background: #28346aff;
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -50,7 +58,7 @@ body {
 .burger span {
   display: block;
   height: 3px;
-  background: #333;
+  background: #b3c1ffff;
   border-radius: 2px;
 }
 
@@ -62,9 +70,7 @@ body {
   right: -260px;
   width: 240px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.6); /* translucent */
-  backdrop-filter: blur(12px);          /* frosted glass effect */
-  -webkit-backdrop-filter: blur(12px);  /* Safari support */
+  background: #28346aff;
   box-shadow: -2px 0 8px rgba(0,0,0,0.1);
   transition: right 0.3s ease;
   z-index: 999;
@@ -91,7 +97,7 @@ body {
 
 .side-menu a {
   text-decoration: none;
-  color: #333;
+  color: #b3c1ffff;
   padding: 0.25rem;
   display: block;
   border-radius: 4px;
@@ -99,21 +105,39 @@ body {
 }
 
 .side-menu a:hover {
-  background: #f0f0f0;
+  background: #112052;
 }
 
 /* Main Content */
 .content {
   max-width: 800px;
-  margin: 80px auto 2rem;
+  margin: 80px auto 2rem; /* auto centers on X-axis */
   padding: 0 1rem;
+  text-align: center;     /* optional: center-align text */
 }
 
 .content h1 {
-  font-size: 2rem;
+  font-size: 7rem;
   margin-bottom: 1rem;
+  font-family: 'forced_square';
+}
+
+.content h2 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  font-family: 'forced_square';
+}
+
+.content h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: 'forced_square';
 }
 
 .content p {
   margin-bottom: 1rem;
+  font-size: 1.7rem;
+  font-family: 'forced_square';
 }
+
+
