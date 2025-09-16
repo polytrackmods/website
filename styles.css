@@ -33,13 +33,15 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
 .logo img {
-  height: 40px; /* controls size */
-  width: auto;  /* keeps aspect ratio */
+  height: 40px;
+  /* controls size */
+  width: auto;
+  /* keeps aspect ratio */
 }
 
 
@@ -71,7 +73,7 @@ body {
   width: 240px;
   height: 100%;
   background: #28346aff;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   transition: right 0.3s ease;
   z-index: 999;
   padding: 1rem;
@@ -111,9 +113,11 @@ body {
 /* Main Content */
 .content {
   max-width: 800px;
-  margin: 80px auto 2rem; /* auto centers on X-axis */
+  margin: 80px auto 2rem;
+  /* auto centers on X-axis */
   padding: 0 1rem;
-  text-align: center;     /* optional: center-align text */
+  text-align: center;
+  /* optional: center-align text */
 }
 
 .content h1 {
@@ -140,4 +144,11 @@ body {
   font-family: 'forced_square';
 }
 
-
+.content ul {
+  text-align: left;
+  display: inline-block;
+  margin: 1rem auto;
+  padding-left: 1.5rem;
+  font-size: 1.7rem;
+  font-family: 'forced_square';
+}
