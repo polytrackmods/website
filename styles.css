@@ -152,3 +152,17 @@ body {
   font-size: 1.7rem;
   font-family: 'forced_square';
 }
+
+a {
+  color: inherit;              /* Same color as surrounding text */
+  text-decoration: underline;  /* Keep underline */
+}
+
+a:visited {
+  color: inherit;              /* Same for visited links */
+}
+
+a:hover, a:active {
+  color: inherit;              /* No color change on hover/active */
+  text-decoration: underline;  /* Still underline */
+}
