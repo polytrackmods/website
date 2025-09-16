@@ -11,14 +11,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: forced_square, system-ui, sans-serif;
 }
 
 /* General */
 body {
-  font-family: system-ui, sans-serif;
   background: #112052;
   color: #b3c1ffff;
   line-height: 1.6;
+  font-size: 1.7rem;
 }
 
 /* Navbar */
@@ -39,11 +40,8 @@ body {
 
 .logo img {
   height: 40px;
-  /* controls size */
   width: auto;
-  /* keeps aspect ratio */
 }
-
 
 /* Burger Menu */
 .burger {
@@ -65,7 +63,6 @@ body {
 }
 
 /* Side Menu */
-/* Side Menu */
 .side-menu {
   position: fixed;
   top: 0;
@@ -83,7 +80,6 @@ body {
   right: 0;
 }
 
-
 .side-menu h2 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -95,6 +91,7 @@ body {
 
 .side-menu li {
   margin: 0.5rem 0;
+  font-size: 1.7rem;
 }
 
 .side-menu a {
@@ -114,55 +111,129 @@ body {
 .content {
   max-width: 800px;
   margin: 80px auto 2rem;
-  /* auto centers on X-axis */
   padding: 0 1rem;
   text-align: center;
-  /* optional: center-align text */
 }
 
 .content h1 {
   font-size: 7rem;
   margin-bottom: 1rem;
-  font-family: 'forced_square';
-}
-
-.content h2 {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  font-family: 'forced_square';
-}
-
-.content h3 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-family: 'forced_square';
-}
-
-.content p {
-  margin-bottom: 1rem;
-  font-size: 1.7rem;
-  font-family: 'forced_square';
 }
 
 .content ul {
-  text-align: left;
   display: inline-block;
-  margin: 1rem auto;
+  text-align: left;
   padding-left: 1.5rem;
+  margin: 1rem auto;
   font-size: 1.7rem;
-  font-family: 'forced_square';
 }
 
+/* Links */
 a {
-  color: inherit;              /* Same color as surrounding text */
-  text-decoration: underline;  /* Keep underline */
+  color: inherit;
+  text-decoration: underline;
 }
 
 a:visited {
-  color: inherit;              /* Same for visited links */
+  color: inherit;
 }
 
-a:hover, a:active {
-  color: inherit;              /* No color change on hover/active */
-  text-decoration: underline;  /* Still underline */
+a:hover,
+a:active {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Status text */
+.status {
+  margin-top: 1.25rem;
+  opacity: 0.95;
+  font-size: 1rem;
+}
+
+/* Mods section (full width) */
+.mods {
+  max-width: none;
+  width: 100%;
+  margin: 40px 0 2rem 0;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.mods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Mod Cards */
+.mod-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mod-card {
+  background-color: #28346aff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 12px rgba(18, 32, 82, 0.3);
+  cursor: pointer;
+}
+
+.mod-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 18px rgba(18, 32, 82, 0.5);
+}
+
+.mod-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  border-radius: 10%;
+}
+
+.mod-card h3,
+.mod-card .mod-author,
+.mod-card .tag {
+  color: #b3c1ffff;
+}
+
+.mod-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.mod-card .mod-author {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.mod-card .mod-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .mod-card { width: 45%; }
+}
+
+@media (max-width: 400px) {
+  .mod-card { width: 90%; }
 }
