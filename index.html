@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyModLoader</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <!-- Replace with your SVG file -->
+            <img src="logo.svg" alt="PolyModLoader Logo">
+        </div>
+        <button id="menu-btn" class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Side Menu -->
+    <aside id="side-menu" class="side-menu">
+        <div class="menu-content">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="#">Mods</a></li>
+                <li><a href="https://codeberg.org/polytrackmods/PolyModLoader/wiki">Wiki</a></li>
+                <li><a href="https://codeberg.org/polytrackmods/PolyModLoader">Source</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+        <h1>PolyModLoader</h1>
+        <p>Text 1</p>
+        <p>Text 2</p>
+    </main>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const sideMenu = document.getElementById('side-menu');
+        menuBtn.addEventListener('click', () => {
+            sideMenu.classList.toggle('open');
+        });
+    </script>
+</body>
+
+</html>

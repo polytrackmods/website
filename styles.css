@@ -1,0 +1,119 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* General */
+body {
+  font-family: system-ui, sans-serif;
+  background: #f9f9fb;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.logo img {
+  height: 40px; /* controls size */
+  width: auto;  /* keeps aspect ratio */
+}
+
+
+/* Burger Menu */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+}
+
+/* Side Menu */
+/* Side Menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 240px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6); /* translucent */
+  backdrop-filter: blur(12px);          /* frosted glass effect */
+  -webkit-backdrop-filter: blur(12px);  /* Safari support */
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  transition: right 0.3s ease;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+
+.side-menu h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.side-menu ul {
+  list-style: none;
+}
+
+.side-menu li {
+  margin: 0.5rem 0;
+}
+
+.side-menu a {
+  text-decoration: none;
+  color: #333;
+  padding: 0.25rem;
+  display: block;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.side-menu a:hover {
+  background: #f0f0f0;
+}
+
+/* Main Content */
+.content {
+  max-width: 800px;
+  margin: 80px auto 2rem;
+  padding: 0 1rem;
+}
+
+.content h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+}
