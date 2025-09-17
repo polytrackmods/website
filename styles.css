@@ -237,3 +237,52 @@ a:active {
 @media (max-width: 400px) {
   .mod-card { width: 90%; }
 }
+
+/* Mod detail view */
+.mod-detail {
+  background: #28346aff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(18, 32, 82, 0.5);
+}
+
+.mod-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.mod-detail-header img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.mod-detail-info h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.mod-desc {
+  margin: 1rem 0 2rem;
+  font-size: 1.2rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  background: #28346a;   /* darker than page background */
+  color: #b3c1ff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.7rem;
+}
+
