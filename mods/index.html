@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mods</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="icon" type="image/svg+xml" href="/images/icon.svg" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PolyModLoader - Mods</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="/images/icon.svg" />
 </head>
-
 <body>
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="logo">
-            <a href="/"><img src="/images/logo.svg" alt="PolyModLoader Logo"></a>
-        </div>
-        <button id="menu-btn" class="burger" aria-label="Open menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </header>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <a href="/"><img src="/images/logo.svg" alt="PolyModLoader Logo" /></a>
+    </div>
+    <button id="menu-btn" class="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-    <!-- Side Menu -->
-    <aside id="side-menu" class="side-menu" aria-hidden="true">
-        <div class="menu-content">
-            <h2>Menu</h2>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/mods">Mods</a></li>
-                <li><a href="https://codeberg.org/polytrackmods/PolyModLoader/wiki">Wiki</a></li>
-                <li><a href="https://codeberg.org/polytrackmods/PolyModLoader">Source</a></li>
-                <li><a href="https://discord.gg/GfQzuqudCg">Discord</a></li>
-            </ul>
-        </div>
-    </aside>
+  <!-- Side Menu -->
+  <aside id="side-menu" class="side-menu" aria-hidden="true">
+    <div class="menu-content">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/mods">Mods</a></li>
+        <li><a href="https://codeberg.org/polytrackmods/PolyModLoader/wiki">Wiki</a></li>
+        <li><a href="https://codeberg.org/polytrackmods/PolyModLoader">Source</a></li>
+        <li><a href="https://discord.gg/GfQzuqudCg">Discord</a></li>
+      </ul>
+    </div>
+  </aside>
 
-    <!-- Main Content -->
-    <main class="content" role="main">
-        <h1>Mods</h1>
-        <div id="status" class="status">Loading mods…</div>
-    </main>
+  <!-- Page heading + status -->
+  <main class="content" role="main">
+    <h1>Mods</h1>
+    <div id="status" class="status">Loading mods…</div>
+  </main>
 
-    <!-- Mods grid -->
-    <section class="mods">
-        <div id="mods-grid" class="mods-grid"></div>
-    </section>
+  <!-- Mods grid -->
+  <section class="mods">
+    <div id="mods-grid" class="mods-grid" aria-live="polite"></div>
+  </section>
 
-    <!-- Scripts -->
-    <script src="mods.js" defer></script>
+  <!-- Mod detail area -->
+  <section id="mod-detail" class="mod-detail" style="display:none;"></section>
 
-    <footer class="footer">
-        <p>© 2025 CRJakob. All rights reserved.</p>
-    </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 CRJakob. All rights reserved.</p>
+  </footer>
+
+  <script src="mods.js" defer></script>
 </body>
-
 </html>

@@ -1,12 +1,9 @@
-/* Forced Square Font */
+/* Reset & font */
 @font-face {
   font-family: forced_square;
   src: url('ForcedSquare.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +11,6 @@
   font-family: forced_square, system-ui, sans-serif;
 }
 
-/* General */
 body {
   background: #112052;
   color: #b3c1ffff;
@@ -40,10 +36,9 @@ body {
 
 .logo img {
   height: 40px;
-  width: auto;
 }
 
-/* Burger Menu */
+/* Burger menu */
 .burger {
   display: flex;
   flex-direction: column;
@@ -100,14 +95,14 @@ body {
   padding: 0.25rem;
   display: block;
   border-radius: 4px;
-  transition: background 0.2s ease;
+  transition: background 0.2s;
 }
 
 .side-menu a:hover {
   background: #112052;
 }
 
-/* Main Content */
+/* Content */
 .content {
   max-width: 800px;
   margin: 80px auto 2rem;
@@ -120,66 +115,39 @@ body {
   margin-bottom: 1rem;
 }
 
-.content ul {
-  display: inline-block;
-  text-align: left;
-  padding-left: 1.5rem;
-  margin: 1rem auto;
-  font-size: 1.7rem;
-}
-
-/* Links */
-a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-a:visited {
-  color: inherit;
-}
-
-a:hover,
-a:active {
-  color: inherit;
-  text-decoration: underline;
-}
-
-/* Status text */
 .status {
   margin-top: 1.25rem;
   opacity: 0.95;
   font-size: 1rem;
 }
 
-/* Mods section (full width) */
+/* Mods grid */
 .mods {
   max-width: none;
   width: 100%;
-  margin: 40px 0 2rem 0;
+  margin: 40px 0 2rem;
   padding: 0 2rem;
-  box-sizing: border-box;
 }
 
 .mods-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
-  width: 100%;
 }
 
-/* Mod Cards */
+/* Mod cards */
 .mod-card-link {
   text-decoration: none;
   color: inherit;
 }
 
 .mod-card {
-  background-color: #28346aff;
+  background: #28346aff;
   border-radius: 12px;
   padding: 1.5rem;
   width: 220px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 0 12px rgba(18, 32, 82, 0.3);
   cursor: pointer;
 }
@@ -195,12 +163,6 @@ a:active {
   object-fit: contain;
   margin-bottom: 1rem;
   border-radius: 10%;
-}
-
-.mod-card h3,
-.mod-card .mod-author,
-.mod-card .tag {
-  color: #b3c1ffff;
 }
 
 .mod-card h3 {
@@ -226,24 +188,25 @@ a:active {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.02);
-  white-space: nowrap;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .mod-card { width: 45%; }
-}
-
-@media (max-width: 400px) {
-  .mod-card { width: 90%; }
-}
-
-/* Mod detail view */
+/* Mod detail */
 .mod-detail {
-  background: #28346aff;
+  max-width: 1100px;
+  margin: 40px auto;
   padding: 2rem;
   border-radius: 12px;
+  background: #28346aff;
   box-shadow: 0 0 18px rgba(18, 32, 82, 0.5);
+  color: #b3c1ffff;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .mod-detail-header {
@@ -258,31 +221,96 @@ a:active {
   height: 100px;
   object-fit: contain;
   border-radius: 12px;
+  flex-shrink: 0;
 }
 
 .mod-detail-info h2 {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.25rem;
+}
+
+.mod-detail-info p.mod-author {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.mod-detail-info .mod-tags {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .mod-desc {
   margin: 1rem 0 2rem;
   font-size: 1.2rem;
+  line-height: 1.6;
 }
 
-.back-link {
-  display: inline-block;
+/* Versions list */
+.mod-versions {
   margin-top: 1rem;
-  text-decoration: underline;
+}
+
+.mod-version {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.version-header {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: #28346aff;
+  transition: background 0.2s;
+}
+
+.version-header:hover {
+  background: #334080ff;
+}
+
+.version-support {
+  font-size: 1rem;
+  color: #b3c1ffff;
+  opacity: 0.8;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.changelog {
+  display: none;
+  padding: 0.5rem 1rem;
+}
+
+.changelog ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  font-size: 1.1rem;
+  margin: 0.25rem 0;
 }
 
 /* Footer */
 .footer {
-  background: #28346a;   /* darker than page background */
+  background: #28346a;
   color: #b3c1ff;
   text-align: center;
   padding: 1rem;
   font-size: 1.7rem;
 }
 
+/* Responsive */
+@media (max-width:600px) {
+  .mod-card {
+    width: 45%;
+  }
+}
+
+@media (max-width:400px) {
+  .mod-card {
+    width: 90%;
+  }
+}
