@@ -38,7 +38,7 @@
 
     <!-- Main Content -->
     <main class="content">
-        <h1>PolyModLoader</h1>
+        <h1 id="titleText">PolyModLoader</h1>
 
         <h2>About</h2>
         <p>PolyModLoader is a Mod Loader for the browser game <a
@@ -77,6 +77,11 @@
         menuBtn.addEventListener('click', () => {
             sideMenu.classList.toggle('open');
         });
+    </script>
+    <script>
+        if (navigator.userAgent.match(/Mobile/)) {
+            document.getElementById('titleText').innerHTML = 'PML';
+        }
     </script>
 </body>
 

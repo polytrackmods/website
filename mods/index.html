@@ -32,19 +32,22 @@
     </div>
   </aside>
 
-  <!-- Page heading + status -->
-  <main class="content" role="main">
-    <h1>Mods</h1>
-    <div id="status" class="status">Loading mods…</div>
+  <!-- Main content (everything except footer + navbar) -->
+  <main role="main">
+    <!-- Page heading + status -->
+    <section class="content">
+      <h1>Mods</h1>
+      <div id="status" class="status">Loading mods…</div>
+    </section>
+
+    <!-- Mods grid -->
+    <section class="mods">
+      <div id="mods-grid" class="mods-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- Mod detail area -->
+    <section id="mod-detail" class="mod-detail" style="display:none;"></section>
   </main>
-
-  <!-- Mods grid -->
-  <section class="mods">
-    <div id="mods-grid" class="mods-grid" aria-live="polite"></div>
-  </section>
-
-  <!-- Mod detail area -->
-  <section id="mod-detail" class="mod-detail" style="display:none;"></section>
 
   <!-- Footer -->
   <footer class="footer">

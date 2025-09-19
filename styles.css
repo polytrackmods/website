@@ -107,8 +107,16 @@ body {
   max-width: 800px;
   margin: 80px auto 2rem;
   padding: 0 1rem;
-  text-align: center;
+  text-align: center; /* keep headings centered */
 }
+
+/* Make lists inside content left-aligned */
+.content ul {
+  text-align: left;
+  margin: 0.5rem auto 1.5rem; /* keeps them centered horizontally */
+  padding-left: 2rem; /* standard list indent */
+}
+
 
 .content h1 {
   font-size: 7rem;
@@ -129,6 +137,7 @@ body {
   padding: 0 2rem;
 }
 
+/* Mods grid */
 .mods-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -136,25 +145,95 @@ body {
 }
 
 /* Mod cards */
-.mod-card-link {
-  text-decoration: none;
-  color: inherit;
-}
-
 .mod-card {
   background: #28346aff;
   border-radius: 12px;
   padding: 1.5rem;
-  width: 220px;
+  width: 100%;       /* make width flexible inside the grid */
+  max-width: 220px;  /* optional: limit max width for larger screens */
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 0 12px rgba(18, 32, 82, 0.3);
   cursor: pointer;
+  word-break: break-word; /* prevent overflow of long text */
 }
+
+@media (max-width: 600px) {
+  .mods-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+  }
+
+  .mod-card {
+    padding: 1rem;
+  }
+
+  .mod-card img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .mod-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .mod-card .mod-author {
+    font-size: 0.9rem;
+  }
+
+  .mod-card .mod-tags {
+    gap: 0.3rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .mods-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .mod-card {
+    padding: 0.8rem;
+  }
+
+  .mod-card img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .mod-card h3 {
+    font-size: 1rem;
+  }
+
+  .mod-card .mod-author {
+    font-size: 0.8rem;
+  }
+
+  .mod-card .mod-tags {
+    gap: 0.2rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.3rem;
+  }
+}
+
 
 .mod-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 18px rgba(18, 32, 82, 0.5);
+}
+
+/* Mod cards */
+.mod-card-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .mod-card img {
@@ -248,6 +327,23 @@ body {
   line-height: 1.6;
 }
 
+.copy-btn {
+  margin-left: auto;
+  background: #112052;
+  color: #b3c1ff;
+  border: 1px solid #334080;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.copy-btn:hover {
+  background: #1c2b63;
+  transform: translateY(-1px);
+}
+
 /* Versions list */
 .mod-versions {
   margin-top: 1rem;
@@ -302,15 +398,23 @@ body {
   font-size: 1.7rem;
 }
 
-/* Responsive */
-@media (max-width:600px) {
-  .mod-card {
-    width: 45%;
-  }
+html, body {
+  height: 100%;
 }
 
-@media (max-width:400px) {
-  .mod-card {
-    width: 90%;
-  }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* make sure body is at least viewport height */
+}
+
+main {
+  flex: 1; /* pushes footer down */
+}
+
+.content a,
+.mod-detail a,
+.footer a {
+  color: #b3c1ff;
+  text-decoration: underline;
 }
