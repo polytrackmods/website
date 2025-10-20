@@ -18,7 +18,7 @@ body {
   font-size: 1.7rem;
 }
 
-/* Navbar */
+/* Navbar layout */
 .navbar {
   position: fixed;
   top: 0;
@@ -34,8 +34,33 @@ body {
   z-index: 1000;
 }
 
+/* Left side logo */
 .logo img {
   height: 40px;
+}
+
+/* Right side (downloads + burger) */
+.appDownloads {
+  display: flex;
+  align-items: center;
+  margin-right: 0.75rem; /* spacing from burger */
+}
+
+.appDownloads img {
+  height: 28px;
+  display: block;
+}
+
+/* Group downloads + burger menu together on the right */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar .right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 /* Burger menu */
@@ -48,14 +73,16 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .burger span {
   display: block;
   height: 3px;
-  background: #b3c1ffff;
+  background: #b3c1ff;
   border-radius: 2px;
 }
+
 
 /* Side Menu */
 .side-menu {
