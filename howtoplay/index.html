@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PolyModLoader</title>
+    <title>PolyModLoader | How to play</title>
     <link rel="stylesheet" href="/styles.css" />
     <link rel="icon" type="image/svg+xml" href="/images/icon.svg" />
   </head>
@@ -15,11 +15,6 @@
         <a href="/"><img src="/images/logo.svg" alt="PolyModLoader Logo" /></a>
       </div>
       <div class="right">
-        <div class="appDownloads">
-          <img
-            src="https://cdn.polymodloader.com/cb/polytrackmods/website/badge/downloads.svg"
-          />
-        </div>
         <button id="menu-btn" class="burger">
           <span></span>
           <span></span>
@@ -53,40 +48,13 @@
 
     <!-- Main Content -->
     <main class="content">
-      <h1 id="titleText">PolyModLoader</h1>
+      <h1 id="titleText">How to play</h1>
 
-      <h2>About</h2>
-      <p>
-        PolyModLoader is a Mod Loader for the browser game
-        <a href="https://www.kodub.com/apps/polytrack">PolyTrack</a> by
-        <a href="https://www.kodub.com">Kodub</a>, developed by Orangy, Lockheed
-        SR-71 Blackbird, CRJakob, Dorachad and SpideyZac.
-      </p>
-
-      <h2>Features</h2>
-      <p>
-        PolyModLoader offers many features for Players and Developers to help
-        make playing with and creating mods easier and more accessible
-      </p>
-      <h3>For Players</h3>
-      <ul>
-        <li>Using multiple mods at once</li>
-        <li>Play on both App and Browser version</li>
-        <li>Mobile support</li>
-        <li>Audomatic mod updates</li>
-        <li>Mod settings</li>
-      </ul>
-      <h3>For Developers</h3>
-      <ul>
-        <li>Mixins</li>
-        <li>APIs for making mods without ever needing to mixin code:</li>
-        <ul>
-          <li>Mod Settings</li>
-          <li>Keybinds</li>
-          <li>Popups</li>
-          <li>Custom Blocks</li>
-        </ul>
-      </ul>
+      <h2>Web</h2>
+      <p>To play with PolyModLoader in the web, simply visit <a href="https://web.polymodloader.com">web.polymodloader.com</a> in a web browser. The web version works on both Desktop (Windows, MacOS, Linux etc.) and Mobile (iOS, Android, etc.) environments.</p>
+      <br>
+      <h2>App</h2>
+      <p>To play with PolyModLoader on the App, go to <a href="https://codeberg.org/polytrackmods/PolyModLoader/releases">the codeberg releases page</a> and download the version for your OS. You can also download the app.asar and replace the app.asar in an existing PolyTrack or PolyModLoader installation. Currently only Windows, MacOS and Linux are supported. An Android app version is currently being tested.</p>
     </main>
     <footer class="footer">
       <p>© 2025 CRJakob. All rights reserved.</p>
@@ -100,7 +68,7 @@
     </script>
     <script>
       if (navigator.userAgent.match(/Mobile/)) {
-        document.getElementById("titleText").innerHTML = "PML";
+        document.getElementById("titleText").innerHTML = "Play";
       }
     </script>
   </body>
