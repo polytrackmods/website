@@ -54,6 +54,16 @@ function saveJsonCache() {
   } catch {}
 }
 
+async function fetchJsonFresh(url) {
+  try {
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) throw new Error();
+    return await r.json();
+  } catch {
+    return null;
+  }
+}
+
 async function fetchJsonCached(url) {
   if (!url) return null;
   if (jsonCache.has(url)) return jsonCache.get(url);
@@ -388,6 +398,25 @@ async function router(mods) {
 
 // ---------- entry ----------
 
+function addModFromList(id, obj) {
+  const mod = {
+    id,
+    name: obj.name || id,
+    author: obj.author || "Unknown",
+    tags: Array.isArray(obj.tags) ? obj.tags : [],
+    url: obj.url || "#",
+    versions: [],
+    manifests: {},
+    polylib: null,
+    gameVersion: null,
+    iconUrl: null,
+  };
+
+  mods.push(mod);
+  GRID.appendChild(buildModCard(mod));
+  enrichMod(mod);
+}
+
 const mods = [];
 
 async function loadMods() {
@@ -397,33 +426,34 @@ async function loadMods() {
   GRID.innerHTML = "";
   STATUS.textContent = "Loading mods…";
 
-  const listJson = await fetchJsonCached(MODLIST_URL);
-  if (!listJson) {
-    STATUS.textContent = "Failed to load mod list.";
+  // ---- Phase A: cache-first ----
+  const cachedList = jsonCache.get(MODLIST_URL);
+  if (cachedList) {
+    for (const [id, obj] of Object.entries(cachedList)) {
+      addModFromList(id, obj);
+    }
+    STATUS.textContent = `Loaded ${mods.length} mods (cached)…`;
+  }
+
+  // ---- Phase B: background refresh ----
+  const freshList = await fetchJsonFresh(MODLIST_URL);
+  if (!freshList) {
+    if (!cachedList) STATUS.textContent = "Failed to load mod list.";
     return;
   }
 
-  totalMods = Object.keys(listJson).length;
+  // Update cache
+  jsonCache.set(MODLIST_URL, freshList);
+  saveJsonCache();
 
-  for (const [id, obj] of Object.entries(listJson)) {
-    const mod = {
-      id,
-      name: obj.name || id,
-      author: obj.author || "Unknown",
-      tags: Array.isArray(obj.tags) ? obj.tags : [],
-      url: obj.url || "#",
-      versions: [],
-      manifests: {},
-      polylib: null,
-      gameVersion: null,
-      iconUrl: null,
-    };
-
-    mods.push(mod);
-    GRID.appendChild(buildModCard(mod));
-    STATUS.textContent = `Loaded ${mods.length} mods…`;
-    enrichMod(mod);
+  // Add only NEW mods
+  for (const [id, obj] of Object.entries(freshList)) {
+    if (mods.some((m) => m.id === id)) continue;
+    addModFromList(id, obj);
   }
+
+  totalMods = mods.length;
+  STATUS.textContent = `Showing ${mods.length} mods.`;
 }
 
 loadMods().catch((err) => {
