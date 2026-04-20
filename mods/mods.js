@@ -32,6 +32,11 @@ function compareVersionStrings(a, b) {
   return 0;
 }
 
+function isValidSemver(version) {
+  const semverRegex = /^\d+\.\d+\.\d+(-[a-zA-Z0-9.-]+)?(\+[a-zA-Z0-9.-]+)?$/;
+  return semverRegex.test(String(version));
+}
+
 // ---------- JSON cache ----------
 
 const jsonCache = new Map();
@@ -206,6 +211,14 @@ async function buildModDetail(mod) {
 
   header.append(icon, info, copyBtn);
 
+  // Lazy-load polylib.json if not already loaded
+  if (!mod.polylib) {
+    const base = mod.url?.replace(/\/+$/, "");
+    if (base) {
+      mod.polylib = await fetchJsonCached(`${base}/polylib.json`);
+    }
+  }
+
   const desc = document.createElement("p");
   desc.className = "mod-desc";
   desc.textContent = mod.polylib?.shortdesc || "No description available.";
@@ -217,7 +230,10 @@ async function buildModDetail(mod) {
     if (mod.manifests[version]) return mod.manifests[version];
     const base = mod.url?.replace(/\/+$/, "");
     if (!base) return null;
+    // Try new version.json format first, then old manifest.json format
     const m = await fetchJsonCached(
+      `${base}/${encodeURIComponent(version)}/version.json`,
+    ) || await fetchJsonCached(
       `${base}/${encodeURIComponent(version)}/manifest.json`,
     );
     if (m) mod.manifests[version] = m;
@@ -230,8 +246,10 @@ async function buildModDetail(mod) {
     empty.textContent = "No version information available.";
     versionsWrap.appendChild(empty);
   } else {
+    const versionElements = new Map();
+
     for (const v of mod.versions) {
-      const manifest = (await ensureManifest(v)) || {};
+      const manifest = mod.manifests[v] || {};
       const polymod = manifest.polymod || manifest;
 
       const block = document.createElement("div");
@@ -257,6 +275,7 @@ async function buildModDetail(mod) {
         ? `PolyTrack ${targets.join(", ")}`
         : "";
       vh.append(left, right);
+      versionElements.set(v, { right, block });
 
       const changelog = document.createElement("div");
       changelog.className = "changelog";
@@ -279,6 +298,7 @@ async function buildModDetail(mod) {
       }
 
       changelog.appendChild(ul);
+
       vh.addEventListener("click", () => {
         changelog.style.display =
           changelog.style.display === "none" ? "block" : "none";
@@ -286,6 +306,24 @@ async function buildModDetail(mod) {
 
       block.append(vh, changelog);
       versionsWrap.appendChild(block);
+    }
+
+    // Load manifests in parallel (non-blocking)
+    for (const v of mod.versions) {
+      if (mod.manifests[v]) continue;
+      ensureManifest(v).then(() => {
+        const manifest = mod.manifests[v] || {};
+        const polymod = manifest.polymod || manifest;
+        const targets = Array.isArray(polymod.targets)
+          ? polymod.targets
+          : polymod.targets
+            ? [polymod.targets]
+            : [];
+        const elem = versionElements.get(v);
+        if (elem && targets.length) {
+          elem.right.textContent = `PolyTrack ${targets.join(", ")}`;
+        }
+      });
     }
   }
 
@@ -295,11 +333,12 @@ async function buildModDetail(mod) {
 
 // ---------- enrichment ----------
 
-const ENRICH_LIMIT = 4;
+const ENRICH_LIMIT = 12;
 const enrichQueue = [];
 let enrichRunning = 0;
 let totalMods = 0;
 let enrichedMods = 0;
+const modFormatCache = new Map();
 
 function enrichMod(mod) {
   enrichQueue.push(mod);
@@ -324,31 +363,59 @@ async function enrichModInternal(mod) {
   const base = mod.url?.replace(/\/+$/, "");
   if (!base) return;
 
-  mod.polylib = await fetchJsonCached(`${base}/polylib.json`);
-
-  const latest = await fetchJsonCached(`${base}/latest.json`);
-  if (latest && typeof latest === "object") {
-    mod.gameVersion = Object.keys(latest).sort(compareVersionStrings).at(-1);
+  // Detect format: try manifest.json or latest.json (cached)
+  let rootManifest = modFormatCache.get(base);
+  if (!rootManifest) {
+    const [m, l] = await Promise.all([
+      fetchJsonCached(`${base}/manifest.json`),
+      fetchJsonCached(`${base}/latest.json`),
+    ]);
+    rootManifest = m || l;
+    modFormatCache.set(base, rootManifest);
   }
 
+  if (!rootManifest || typeof rootManifest !== "object") return;
+
+  // Always fetch directory listing to get actual mod version folders
   const listing = await fetchJsonCached(`${base}/`);
   if (!Array.isArray(listing)) return;
 
-  mod.versions = listing
-    .filter((e) => e.type === "dir" && !e.name.startsWith("."))
+  const versions = listing
+    .filter((e) => e.type === "dir" && isValidSemver(e.name))
     .map((e) => e.name)
     .sort(compareVersionStrings)
     .reverse();
 
-  if (mod.versions.length) {
-    const v = mod.versions[0];
-    mod.iconUrl = `${base}/${encodeURIComponent(v)}/icon.png`;
+  if (!versions.length) return;
 
-    const manifest = await fetchJsonCached(
-      `${base}/${encodeURIComponent(v)}/manifest.json`,
-    );
-    if (manifest) mod.manifests[v] = manifest;
+  // Determine gameVersion based on format
+  let gameVersion = null;
+  if (rootManifest.latest && typeof rootManifest.latest === "object") {
+    // New format: latest maps PolyTrack versions to mod versions
+    // Find the highest PolyTrack version that exists
+    gameVersion = Object.keys(rootManifest.latest)
+      .sort(compareVersionStrings)
+      .reverse()
+      .find((v) => rootManifest.latest[v]);
+  } else {
+    // Old format: latest.json maps mod versions to PolyTrack versions
+    gameVersion = Object.keys(rootManifest)
+      .sort(compareVersionStrings)
+      .at(-1);
   }
+
+  mod.versions = versions;
+  mod.gameVersion = gameVersion;
+
+  const v = versions[0];
+  mod.iconUrl = `${base}/${encodeURIComponent(v)}/icon.png`;
+
+  // Try new version.json format first, then old manifest.json format
+  const [versionFile, manifestFile] = await Promise.all([
+    fetchJsonCached(`${base}/${encodeURIComponent(v)}/version.json`),
+    fetchJsonCached(`${base}/${encodeURIComponent(v)}/manifest.json`),
+  ]);
+  if (versionFile || manifestFile) mod.manifests[v] = versionFile || manifestFile;
 
   patchModCard(mod);
 
